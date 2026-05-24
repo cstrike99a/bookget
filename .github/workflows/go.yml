@@ -3,6 +3,7 @@ name: Release bookget
 on:
   push:
     tags: [ "v*" ]
+  workflow_dispatch:
 jobs:
   build:
     strategy:
@@ -61,7 +62,7 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          token: ${{ secrets.RELEASE_TOKEN }}  # 替换默认的GITHUB_TOKEN
+          token: ${{ secrets.GITHUB_TOKEN }} # 替换默认的GITHUB_TOKEN
           tag_name: ${{ github.ref_name }}
           name: "bookget ${{ github.ref_name }}"
           body: "|
